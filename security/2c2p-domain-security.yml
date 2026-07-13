@@ -1,0 +1,72 @@
+generated: '2026-07-12'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + PGW API hosts
+hosts:
+- host: 2c2p.com
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: GlobalSign RSA OV SSL CA 2018
+  cert_expires: Oct 18 03:00:23 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  hsts_preload: true
+  http_status: 200
+- host: www.2c2p.com
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: GlobalSign RSA OV SSL CA 2018
+  cert_expires: Oct 18 03:00:23 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  hsts_preload: true
+  http_status: 301
+- host: developer.2c2p.com
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: Let's Encrypt (YE2)
+  cert_expires: Sep 23 13:01:55 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: false
+  http_status: 302
+- host: pgw.2c2p.com
+  https: true
+  tls_version: TLSv1.2
+  cert_issuer: GlobalSign RSA OV SSL CA 2018
+  cert_expires: Oct 18 03:00:23 2026 GMT
+  hsts: false
+  http_status: 403
+  note: Production PGW API host. Returns 403 to unauthenticated GET; expects signed JWT POST to /payment/4.3/* endpoints.
+- host: sandbox-pgw.2c2p.com
+  https: true
+  tls_version: TLSv1.2
+  cert_issuer: GlobalSign RSA OV SSL CA 2018
+  cert_expires: Oct 18 03:00:23 2026 GMT
+  hsts: false
+  http_status: 403
+  note: Sandbox PGW API host. Returns 403 to unauthenticated GET; expects signed JWT POST.
+domains:
+- domain: 2c2p.com
+  dnssec: false
+  caa:
+  - '0 issue "digicert.com"'
+  - '0 issue "entrust.net"'
+  - '0 issue "geotrust.com"'
+  - '0 issue "globalsign.com"'
+  - '0 issue "letsencrypt.org"'
+  - '0 issue "rapidssl.com"'
+  - '0 issue "sectigo.com"'
+  - '0 issue "securetrust.com"'
+  - '0 issue "symantec.com"'
+  - '0 issue "thaidigitalid.com"'
+  - '0 issue "thawte.com"'
+  - '0 issue "visa.com"'
+  - '0 issue "amazon.com"'
+  - '0 issue "comodoca.com"'
+  spf: true
+  spf_record: v=spf1 include:_spf.google.com include:mail.zendesk.com include:sendgrid.net include:amazonses.com include:44900109.spf01.hubspotemail.net ~all
+  dmarc: true
+  dmarc_policy: quarantine
+  dmarc_pct: 25

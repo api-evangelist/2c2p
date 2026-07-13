@@ -1,0 +1,148 @@
+{
+  "info": {
+    "name": "2C2P Payment Gateway API (PGW v4.3)",
+    "description": "Server-to-server REST for the 2C2P Payment Gateway. Every request/response body is a JWT (JWS) signed with the merchant Secret Key using HMAC SHA-256; there is no Authorization header and the merchant is identified by merchantID inside the signed payload. The example bodies below are the DECODED JSON payloads for readability - in production you must JWT-encode the request and JWT-decode the response. Base URL: https://pgw.2c2p.com/payment/4.3 (production) or https://sandbox-pgw.2c2p.com/payment/4.3 (sandbox). Endpoint paths are confirmed from developer.2c2p.com; payload fields are modeled.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://sandbox-pgw.2c2p.com/payment/4.3", "type": "string" },
+    { "key": "merchantID", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Payment Token",
+      "item": [
+        {
+          "name": "Create a payment token",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"merchantID\": \"{{merchantID}}\",\n  \"invoiceNo\": \"INV0001\",\n  \"description\": \"Order INV0001\",\n  \"amount\": 100.00,\n  \"currencyCode\": \"SGD\",\n  \"frontendReturnUrl\": \"https://merchant.example/return\",\n  \"backendReturnUrl\": \"https://merchant.example/notify\"\n}" },
+            "url": { "raw": "{{baseUrl}}/paymentToken", "host": ["{{baseUrl}}"], "path": ["paymentToken"] },
+            "description": "Initializes a payment and returns paymentToken + webPaymentUrl. Encode this JSON as a JWT (HS256, merchant secret key) before sending."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Do Payment",
+      "item": [
+        {
+          "name": "Do payment",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"paymentToken\": \"<paymentToken>\",\n  \"payment\": {\n    \"code\": { \"channelCode\": \"CC\" },\n    \"data\": { \"securePayToken\": \"<encryptedCardInfo>\" }\n  },\n  \"clientIP\": \"1.2.3.4\",\n  \"responseReturnUrl\": \"https://merchant.example/return\"\n}" },
+            "url": { "raw": "{{baseUrl}}/payment", "host": ["{{baseUrl}}"], "path": ["payment"] },
+            "description": "Executes a payment against a paymentToken. For cards, data carries a Secure Fields securePayToken."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment Option",
+      "item": [
+        {
+          "name": "Get payment options",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"paymentToken\": \"<paymentToken>\",\n  \"locale\": \"en\"\n}" },
+            "url": { "raw": "{{baseUrl}}/paymentOption", "host": ["{{baseUrl}}"], "path": ["paymentOption"] },
+            "description": "Returns the payment options / channels available for a paymentToken."
+          }
+        },
+        {
+          "name": "Get payment option details",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"paymentToken\": \"<paymentToken>\",\n  \"locale\": \"en\"\n}" },
+            "url": { "raw": "{{baseUrl}}/paymentOptionDetails", "host": ["{{baseUrl}}"], "path": ["paymentOptionDetails"] },
+            "description": "Returns detailed metadata for a specific payment option / channel."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inquiry",
+      "item": [
+        {
+          "name": "Payment inquiry",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"merchantID\": \"{{merchantID}}\",\n  \"invoiceNo\": \"INV0001\",\n  \"locale\": \"en\"\n}" },
+            "url": { "raw": "{{baseUrl}}/paymentInquiry", "host": ["{{baseUrl}}"], "path": ["paymentInquiry"] },
+            "description": "Retrieves the full transaction result by merchantID + invoiceNo."
+          }
+        },
+        {
+          "name": "Transaction status",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"merchantID\": \"{{merchantID}}\",\n  \"paymentToken\": \"<paymentToken>\",\n  \"locale\": \"en\"\n}" },
+            "url": { "raw": "{{baseUrl}}/transactionStatus", "host": ["{{baseUrl}}"], "path": ["transactionStatus"] },
+            "description": "Returns the current status of a transaction."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Maintenance",
+      "item": [
+        {
+          "name": "Cancel / void transaction",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"merchantID\": \"{{merchantID}}\",\n  \"invoiceNo\": \"INV0001\"\n}" },
+            "url": { "raw": "{{baseUrl}}/cancelTransaction", "host": ["{{baseUrl}}"], "path": ["cancelTransaction"] },
+            "description": "Voids or cancels a transaction. Refund and settle are covered by the payment maintenance guides."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tokens",
+      "item": [
+        {
+          "name": "Card token info",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"merchantID\": \"{{merchantID}}\",\n  \"cardToken\": \"<cardToken>\",\n  \"locale\": \"en\"\n}" },
+            "url": { "raw": "{{baseUrl}}/cardTokenInfo", "host": ["{{baseUrl}}"], "path": ["cardTokenInfo"] },
+            "description": "Retrieves information about a stored card token for recurring / returning-buyer use."
+          }
+        },
+        {
+          "name": "Card installment plan info",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"merchantID\": \"{{merchantID}}\",\n  \"invoiceNo\": \"INV0001\",\n  \"locale\": \"en\"\n}" },
+            "url": { "raw": "{{baseUrl}}/cardInstallmentPlanInfo", "host": ["{{baseUrl}}"], "path": ["cardInstallmentPlanInfo"] },
+            "description": "Returns the available installment plans for a card / merchant."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Exchange Rate",
+      "item": [
+        {
+          "name": "Exchange rate",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"merchantID\": \"{{merchantID}}\",\n  \"invoiceNo\": \"INV0001\",\n  \"amount\": 100.00,\n  \"currencyCode\": \"USD\"\n}" },
+            "url": { "raw": "{{baseUrl}}/exchangeRate", "host": ["{{baseUrl}}"], "path": ["exchangeRate"] },
+            "description": "Retrieves currency exchange rates for a transaction (DCC / cross-border)."
+          }
+        }
+      ]
+    }
+  ]
+}

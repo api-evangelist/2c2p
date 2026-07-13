@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "2C2P Payment Gateway API (PGW v4.3)",
+    "version": "4.3"
+  },
+  "items": [
+    {
+      "info": { "name": "Payment Token", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a payment token", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-pgw.2c2p.com/payment/4.3/paymentToken",
+            "body": { "type": "json", "data": "{\n  \"merchantID\": \"\",\n  \"invoiceNo\": \"INV0001\",\n  \"description\": \"Order INV0001\",\n  \"amount\": 100.00,\n  \"currencyCode\": \"SGD\",\n  \"frontendReturnUrl\": \"https://merchant.example/return\",\n  \"backendReturnUrl\": \"https://merchant.example/notify\"\n}" }
+          },
+          "docs": "Initializes a payment and returns paymentToken + webPaymentUrl. Encode this JSON as a JWT (HS256, merchant secret key) before sending; decode the JWT response."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Do Payment", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Do payment", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-pgw.2c2p.com/payment/4.3/payment",
+            "body": { "type": "json", "data": "{\n  \"paymentToken\": \"<paymentToken>\",\n  \"payment\": {\n    \"code\": { \"channelCode\": \"CC\" },\n    \"data\": { \"securePayToken\": \"<encryptedCardInfo>\" }\n  },\n  \"clientIP\": \"1.2.3.4\",\n  \"responseReturnUrl\": \"https://merchant.example/return\"\n}" }
+          },
+          "docs": "Executes a payment against a paymentToken. For cards, data carries a Secure Fields securePayToken."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Payment Option", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get payment options", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-pgw.2c2p.com/payment/4.3/paymentOption",
+            "body": { "type": "json", "data": "{\n  \"paymentToken\": \"<paymentToken>\",\n  \"locale\": \"en\"\n}" }
+          },
+          "docs": "Returns the payment options / channels available for a paymentToken."
+        },
+        {
+          "info": { "name": "Get payment option details", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-pgw.2c2p.com/payment/4.3/paymentOptionDetails",
+            "body": { "type": "json", "data": "{\n  \"paymentToken\": \"<paymentToken>\",\n  \"locale\": \"en\"\n}" }
+          },
+          "docs": "Returns detailed metadata for a specific payment option / channel."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Inquiry", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Payment inquiry", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-pgw.2c2p.com/payment/4.3/paymentInquiry",
+            "body": { "type": "json", "data": "{\n  \"merchantID\": \"\",\n  \"invoiceNo\": \"INV0001\",\n  \"locale\": \"en\"\n}" }
+          },
+          "docs": "Retrieves the full transaction result by merchantID + invoiceNo."
+        },
+        {
+          "info": { "name": "Transaction status", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-pgw.2c2p.com/payment/4.3/transactionStatus",
+            "body": { "type": "json", "data": "{\n  \"merchantID\": \"\",\n  \"paymentToken\": \"<paymentToken>\",\n  \"locale\": \"en\"\n}" }
+          },
+          "docs": "Returns the current status of a transaction."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Maintenance", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Cancel / void transaction", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-pgw.2c2p.com/payment/4.3/cancelTransaction",
+            "body": { "type": "json", "data": "{\n  \"merchantID\": \"\",\n  \"invoiceNo\": \"INV0001\"\n}" }
+          },
+          "docs": "Voids or cancels a transaction. Refund and settle are covered by the payment maintenance guides."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Tokens", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Card token info", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-pgw.2c2p.com/payment/4.3/cardTokenInfo",
+            "body": { "type": "json", "data": "{\n  \"merchantID\": \"\",\n  \"cardToken\": \"<cardToken>\",\n  \"locale\": \"en\"\n}" }
+          },
+          "docs": "Retrieves information about a stored card token for recurring / returning-buyer use."
+        },
+        {
+          "info": { "name": "Card installment plan info", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-pgw.2c2p.com/payment/4.3/cardInstallmentPlanInfo",
+            "body": { "type": "json", "data": "{\n  \"merchantID\": \"\",\n  \"invoiceNo\": \"INV0001\",\n  \"locale\": \"en\"\n}" }
+          },
+          "docs": "Returns the available installment plans for a card / merchant."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Exchange Rate", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Exchange rate", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-pgw.2c2p.com/payment/4.3/exchangeRate",
+            "body": { "type": "json", "data": "{\n  \"merchantID\": \"\",\n  \"invoiceNo\": \"INV0001\",\n  \"amount\": 100.00,\n  \"currencyCode\": \"USD\"\n}" }
+          },
+          "docs": "Retrieves currency exchange rates for a transaction (DCC / cross-border)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,117 @@
+aid: "2c2p"
+name: "2C2P"
+review:
+  question: Does 2C2P expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. 2C2P's Payment Gateway (PGW) API is
+    entirely request/response REST over HTTPS - every operation is an HTTPS POST
+    whose body is a JWT (JWS) signed with the merchant's secret key. The only
+    server-initiated messaging is the backend payment notification: 2C2P POSTs a
+    JWT result to the merchant's configured backendReturnUrl (a webhook), which
+    is server-to-endpoint HTTP, not a WebSocket or SSE stream. There is no
+    ws:// or wss:// transport and no server-push channel on 2C2P's own API to
+    model, so no AsyncAPI spec was created.
+findings:
+  summary: |
+    2C2P does not publish a documented public WebSocket API. 2C2P is a
+    Singapore-based payment gateway serving Southeast Asia. Its Payment Gateway
+    (PGW) API - Payment v4.3 - is a server-to-server REST interface hosted at
+    https://pgw.2c2p.com (production) and https://sandbox-pgw.2c2p.com (sandbox).
+    Every documented endpoint is an HTTPS POST under /payment/4.3/ whose request
+    and response bodies are JSON Web Tokens (JWS) signed with the merchant's
+    secret key using HMAC SHA-256; select endpoints additionally support a
+    JWT+JWS (asymmetric) variant. Authentication is by Merchant ID plus secret
+    key, applied by signing the JWT payload rather than by a bearer header.
+    Asynchronous payment results are delivered as a backend notification: 2C2P
+    POSTs a signed JWT to the merchant's backendReturnUrl (a webhook), and the
+    browser is redirected to frontendReturnUrl. No realtime, bidirectional, or
+    streaming WebSocket (ws:// or wss://) endpoint is documented anywhere in the
+    2C2P developer portal as of the review date.
+  accessModel: |
+    Access requires a 2C2P merchant account (commercial onboarding / KYC). 2C2P
+    issues a Merchant ID and a secret key; developers build and test against the
+    sandbox (sandbox-pgw.2c2p.com) before switching to production
+    (pgw.2c2p.com). There is no self-serve public API key issued from the docs;
+    credentials come from the merchant profile. The developer portal
+    (developer.2c2p.com) is public and documents the APIs, SDKs (SecurePay /
+    Secure Fields), and Postman-style references.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://pgw.2c2p.com/payment/4.3
+      documented: true
+      note: All PGW v4.3 operations are HTTPS POST with JWT (JWS) request/response bodies. Sandbox base is https://sandbox-pgw.2c2p.com/payment/4.3.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Backend payment notification - 2C2P POSTs a signed JWT to the merchant's backendReturnUrl. Server-to-endpoint HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the 2C2P Payment Gateway API, SNAP, SoftPOS, Payout, or any other 2C2P product page as of the review date.
+  confirmedEndpoints:
+    - POST https://pgw.2c2p.com/payment/4.3/paymentToken
+    - POST https://pgw.2c2p.com/payment/4.3/payment
+    - POST https://pgw.2c2p.com/payment/4.3/paymentOption
+    - POST https://pgw.2c2p.com/payment/4.3/paymentOptionDetails
+    - POST https://pgw.2c2p.com/payment/4.3/paymentInquiry
+    - POST https://pgw.2c2p.com/payment/4.3/transactionStatus
+    - POST https://pgw.2c2p.com/payment/4.3/cancelTransaction
+    - POST https://pgw.2c2p.com/payment/4.3/cardTokenInfo
+    - POST https://pgw.2c2p.com/payment/4.3/cardInstallmentPlanInfo
+    - POST https://pgw.2c2p.com/payment/4.3/loyaltyPointInfo
+    - POST https://pgw.2c2p.com/payment/4.3/exchangeRate
+    - POST https://pgw.2c2p.com/payment/4.3/exchangeRate/apmMccExchangeRate
+    - POST https://pgw.2c2p.com/payment/4.3/paymentNotification
+    - POST https://pgw.2c2p.com/payment/4.3/paymentInstruction
+    - POST https://pgw.2c2p.com/payment/4.3/userPreference
+    - POST https://pgw.2c2p.com/payment/4.3/applePay/merchantValidation
+  modeledNote: |
+    The endpoint paths above are confirmed from the 2C2P developer portal
+    reference index (llms.txt / /reference/post_payment-4-3-*). Request and
+    response field schemas in openapi/2c2p-openapi.yml are MODELED from the
+    documented parameters (paymentToken, merchantID, invoiceNo, amount,
+    currencyCode, payment.code, payment.data, etc.) and are a representative
+    subset, not a byte-for-byte copy of 2C2P's JWT payload contract. Because
+    real requests/responses are JWT-encoded strings, the OpenAPI models the
+    decoded JSON payloads for clarity. Refund and settle operations are
+    documented as maintenance guides; cancelTransaction is the confirmed
+    void/cancel endpoint path.
+sources:
+  - url: https://developer.2c2p.com/docs
+    type: Documentation
+    note: PGW Payment v4.3 & Quickpay v2.4 developer portal index.
+  - url: https://developer.2c2p.com/llms.txt
+    type: Documentation
+    note: Machine-readable index listing all /payment/4.3/* reference endpoints (all POST, all JWT).
+  - url: https://developer.2c2p.com/docs/api-payment-token
+    type: APIReference
+    note: Payment Token - POST /payment/4.3/paymentToken; JWT signed with merchant secret key (HMAC SHA-256); returns paymentToken + webPaymentUrl.
+  - url: https://developer.2c2p.com/reference/post_payment-4-3-payment
+    type: APIReference
+    note: Do Payment - POST /payment/4.3/payment; paymentToken + payment.code + payment.data; card/e-wallet/QR/installment channels.
+  - url: https://developer.2c2p.com/docs/api-payment-inquiry
+    type: APIReference
+    note: Payment Inquiry - POST /payment/4.3/paymentInquiry; merchantID + invoiceNo + locale; JWT request/response.
+  - url: https://developer.2c2p.com/docs/api-payment-option
+    type: APIReference
+    note: Payment Option - POST /payment/4.3/paymentOption; available channels per paymentToken.
+  - url: https://developer.2c2p.com/docs/using-securefields
+    type: Documentation
+    note: Secure Fields - browser-side card capture returning encryptedCardInfo / securePayToken for Do Payment. No WebSocket.
+  - url: https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide
+    type: Documentation
+    note: Recurring payment maintenance via customer/card tokenization; not a streaming transport.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists on any 2C2P API. The Payment Gateway
+    API is request/response REST (HTTPS POST with JWT/JWS bodies), and the only
+    server-initiated messaging is the backend notification webhook to
+    backendReturnUrl. No AsyncAPI document was created because there is no
+    server-push (WebSocket or SSE) transport on 2C2P's own API to model.

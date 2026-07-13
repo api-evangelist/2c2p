@@ -1,0 +1,114 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: 2C2P
+providerId: 2c2p
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- Southeast Asia
+- Cards
+- E-Wallet
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of 2C2P spend. 2C2P is a merchant acquirer / payment gateway, so
+  cost is not a per-API-call software fee but a per-transaction payment cost:
+  typically a merchant discount rate (a percentage of transaction value) and/or
+  a fixed per-transaction fee, which vary by payment method (card scheme,
+  e-wallet, QR, installment, cross-border), currency, country, settlement
+  terms, and the negotiated merchant agreement. Additional costs can include
+  cross-border / FX and dynamic currency conversion margins, refund/chargeback
+  handling, and payout/disbursement fees. There is no public self-serve rate
+  card; pricing is set during commercial onboarding.
+notes: >-
+  Per-transaction rates are NOT reconciled here - 2C2P does not publish a fixed
+  public price list, and effective rates are negotiated per merchant and per
+  market. The sandbox (sandbox-pgw.2c2p.com) is free for development and
+  testing. Treat the meters below as the cost dimensions to instrument, not as
+  quoted prices; confirm actual rates in your 2C2P merchant agreement.
+sources:
+- https://www.2c2p.com
+- https://developer.2c2p.com/docs
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: 2C2P
+serviceCategory: Payments and Financial Services
+billingModel:
+  pricingCategory: Transaction-Based
+  billingFrequency: Per Settlement
+  billingCurrency: Multi-Currency
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: 2C2P Payment Gateway
+  ServiceCategory: Payments and Financial Services
+  ProviderName: 2C2P
+  PublisherName: 2C2P
+  InvoiceIssuerName: 2C2P
+  BillingCurrency: Multi-Currency
+  ChargeCategory: Usage
+  PricingCategory: Transaction-Based
+meters:
+- name: transaction_value
+  description: Merchant discount rate (MDR) applied as a percentage of each processed transaction's value. Rate varies by payment method, scheme, and market.
+  unit: percent_of_amount
+  aggregation: sum
+  dimensions:
+  - merchant
+  - paymentMethod
+  - currency
+  - country
+- name: per_transaction_fee
+  description: Fixed fee charged per successful transaction, on top of or instead of the percentage MDR, depending on method and agreement.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - merchant
+  - paymentMethod
+  - currency
+- name: cross_border_fx
+  description: Cross-border and FX / dynamic currency conversion margin on multi-currency and international transactions.
+  unit: percent_of_amount
+  aggregation: sum
+  dimensions:
+  - merchant
+  - currency
+  - country
+- name: refund_chargeback
+  description: Handling fees for refunds and chargebacks / disputes, where applicable per the merchant agreement.
+  unit: events
+  aggregation: sum
+  dimensions:
+  - merchant
+  - type
+- name: payout_disbursement
+  description: Fees for payout / disbursement of funds to beneficiaries via 2C2P Payout services, where used.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - merchant
+  - currency
+principles:
+- name: Visibility
+  description: Reconcile settlement reports (batch reconciliation services) against transaction volume per payment method, currency, and country to see effective blended cost per transaction.
+- name: Allocation
+  description: Tag transactions by invoiceNo / channel / brand so payment cost maps to product lines and internal cost centers.
+- name: Optimization
+  description: Route to lower-cost payment methods where possible (local e-wallets / QR vs. cross-border cards), minimize FX/DCC margin, and reduce refunds/chargebacks that carry handling fees.
+- name: Accountability
+  description: Assign an owner for the 2C2P merchant relationship; review the negotiated rate card and monthly settlement statements against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

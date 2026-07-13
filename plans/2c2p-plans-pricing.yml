@@ -1,0 +1,105 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: 2C2P
+providerId: 2c2p
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- Southeast Asia
+- Cards
+- E-Wallet
+- Plans
+description: >-
+  2C2P is a merchant payments provider rather than a self-serve API product, so
+  there are no public sign-up API tiers. Access follows a merchant model: a free
+  developer sandbox for building and testing, and a commercial merchant account
+  (Merchant ID + secret key) provisioned after onboarding / KYC, priced per
+  transaction under a negotiated agreement. Larger merchants and platforms use
+  enterprise / partner arrangements. Exact per-transaction rates are not
+  reconciled here and are set during onboarding.
+notes: >-
+  The developer portal (developer.2c2p.com) and sandbox (sandbox-pgw.2c2p.com)
+  are openly available; production access and pricing require a signed merchant
+  agreement. Verify current terms with 2C2P sales.
+sources:
+- https://www.2c2p.com
+- https://developer.2c2p.com/docs
+plans:
+- id: 2c2p-sandbox
+  name: Developer Sandbox
+  type: free
+  description: >-
+    Free sandbox environment for integrating and testing against the Payment
+    Gateway (PGW v4.3) APIs at sandbox-pgw.2c2p.com, including test merchant
+    credentials, Secure Fields / SecurePay SDKs, and simulated payments. No
+    live funds move.
+  entries:
+  - label: Sandbox Transactions
+    name: sandbox_transactions
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (test environment)
+    userMultiplied: false
+  elements:
+  - name: Full PGW v4.3 API Access
+  - name: Test Credentials
+  - name: Secure Fields / SecurePay SDK
+  - name: Payment Simulation
+- id: 2c2p-merchant
+  name: Merchant Account
+  type: usage
+  description: >-
+    Production merchant account provisioned after commercial onboarding / KYC.
+    Accepts live card, e-wallet, QR, and installment payments across supported
+    Southeast Asian and international markets. Priced per transaction
+    (percentage MDR and/or fixed fee) under a negotiated agreement.
+  entries:
+  - label: Processed Transactions
+    name: processed_transactions
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: per-transaction (MDR % and/or fixed fee; negotiated - see merchant agreement)
+    userMultiplied: false
+  elements:
+  - name: Cards, E-Wallets, QR, Installments
+  - name: Tokenization and Recurring
+  - name: Payment Maintenance (Void / Refund / Settle)
+  - name: Settlement and Reconciliation
+- id: 2c2p-enterprise
+  name: Enterprise / Platform
+  type: enterprise
+  description: >-
+    Custom arrangement for large merchants, marketplaces, and platforms -
+    multi-entity onboarding, payouts / disbursement, cross-border, SoftPOS,
+    batch services, dedicated support, and negotiated volume pricing.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Volume / Cross-Border Pricing
+  - name: Payout and Disbursement
+  - name: SoftPOS and Batch Services
+  - name: Dedicated Support and SLAs
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

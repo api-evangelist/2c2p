@@ -1,0 +1,41 @@
+generated: '2026-07-12'
+method: documented
+source: https://developer.2c2p.com/docs
+summary:
+  types:
+  - jwt
+  - hmac
+schemes:
+- name: merchantJwt
+  type: jwt
+  scheme: JWS
+  algorithm: HS256
+  description: >-
+    2C2P Payment Gateway (PGW v4.3) does not use an HTTP Authorization header.
+    Instead, the entire request body is a JSON Web Token (JWS) whose payload
+    carries the transaction fields and whose signature authenticates the
+    merchant. The merchant signs the JWT with its Secret Key using HMAC SHA-256
+    (HS256); 2C2P returns a JWT signed the same way, which the merchant verifies
+    and decodes. The merchant is identified by the merchantID field inside the
+    signed payload. Credentials (Merchant ID + Secret Key) are issued via the
+    2C2P merchant profile after commercial onboarding, separately for sandbox
+    and production.
+  parameters:
+  - name: merchantID
+    location: payload
+    description: Merchant identifier included in the signed JWT payload of every request.
+  - name: secretKey
+    location: signing-key
+    description: Merchant secret key used as the HMAC SHA-256 key to sign/verify the JWT. Never transmitted.
+  notes: >-
+    Select endpoints (for example the secured exchangeRate variant) additionally
+    support JWT+JWS with asymmetric signing for enhanced security. The Secure
+    Fields / SecurePay flow tokenizes card data in the browser and returns an
+    encryptedCardInfo (securePayToken) that is then submitted inside the signed
+    Do Payment request, keeping raw card data out of the merchant server.
+  sources:
+  - https://developer.2c2p.com/docs/api-payment-token
+  - https://developer.2c2p.com/docs/api-payment-inquiry
+  - https://developer.2c2p.com/docs/using-securefields
+sandboxHost: https://sandbox-pgw.2c2p.com
+productionHost: https://pgw.2c2p.com

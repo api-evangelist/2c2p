@@ -1,0 +1,58 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: 2C2P
+providerId: 2c2p
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Payments
+- Payment Gateway
+- Southeast Asia
+- Rate Limiting
+- Quotas
+description: >-
+  2C2P does not publish fixed numeric rate limits for the Payment Gateway (PGW
+  v4.3) API. As a payment acquirer, throughput is governed by the merchant
+  agreement, risk / fraud controls, and the underlying card scheme and
+  alternative-payment-method processors rather than by a documented
+  requests-per-second cap. Idempotency is anchored on a unique invoiceNo per
+  transaction, and transaction results should be confirmed via the backend
+  notification webhook and Payment Inquiry rather than by tight polling.
+notes: >-
+  No public per-account or per-endpoint request-rate numbers are documented as
+  of the review date. Numeric limits, if any, are communicated during merchant
+  onboarding. The values below describe the operational controls, not quoted
+  quotas.
+sources:
+- https://developer.2c2p.com/docs
+- https://developer.2c2p.com/docs/api-payment-inquiry
+responseCodes:
+  throttled: 429
+limits:
+- name: PGW API Requests
+  scope: merchant
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the Payment Gateway API; governed by merchant agreement and risk controls.
+- name: Transaction Idempotency
+  scope: merchant
+  metric: invoiceNo
+  limit: unique per transaction
+  notes: Each transaction is keyed on a unique invoiceNo; reusing an invoiceNo is rejected rather than double-charged.
+- name: Inquiry / Status Polling
+  scope: merchant
+  metric: requests
+  limit: not published
+  notes: Prefer the backend notification webhook plus Payment Inquiry / Transaction Status over aggressive polling.
+policies:
+- name: Backend Notification First
+  description: Rely on the server-to-server backend notification (backendReturnUrl) as the authoritative transaction result; use Payment Inquiry to reconcile rather than polling in a tight loop.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+- name: Risk and Fraud Controls
+  description: Requests may be throttled or declined by 2C2P risk / fraud screening and by upstream scheme and APM processors independent of any request-rate cap.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
