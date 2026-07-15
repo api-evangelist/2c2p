@@ -211,6 +211,8 @@ apis:
     securePayToken that is passed to the Do Payment (or SecurePay) API so raw PAN
     never touches the merchant server. Reduces merchant PCI scope.
 common:
+- type: AgenticAccess
+  url: agentic-access/2c2p-agentic-access.yml
 - type: DomainSecurity
   url: security/2c2p-domain-security.yml
 - type: Authentication
