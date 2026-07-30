@@ -11,7 +11,20 @@ description: 2C2P is a Singapore-headquartered payments platform serving merchan
   recurring payments, transaction inquiry and status, void/cancel and refund
   maintenance, currency exchange, and backend (server-to-server) payment
   notifications. 2C2P is part of Ant International.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/2c2p.png
 tags:
 - Payments
 - Payment Gateway
@@ -27,171 +40,6 @@ created: '2026-07-12'
 modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
-- aid: 2c2p:2c2p-payment-token-api
-  name: 2C2P Payment Token API
-  tags:
-  - Payment Token
-  - Checkout
-  - Cards
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.2c2p.com/docs/api-payment-token
-  baseURL: https://pgw.2c2p.com/payment/4.3
-  properties:
-  - url: https://developer.2c2p.com/docs/api-payment-token
-    type: Documentation
-  - url: https://developer.2c2p.com/reference/post_payment-4-3-paymenttoken
-    type: APIReference
-  - url: openapi/2c2p-openapi.yml
-    type: OpenAPI
-  - url: collections/2c2p.postman_collection.json
-    type: PostmanCollection
-  - url: collections/2c2p.opencollection.json
-    type: OpenCollection
-  description: Server-to-server POST that initializes a payment and returns a
-    paymentToken plus a webPaymentUrl for the hosted payment page. Request and
-    response bodies are JWTs signed with the merchant secret key (HMAC SHA-256).
-    Carries invoiceNo, amount, currencyCode, description, and channel/tokenize
-    options.
-- aid: 2c2p:2c2p-do-payment-api
-  name: 2C2P Do Payment API
-  tags:
-  - Payments
-  - Cards
-  - E-Wallet
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.2c2p.com/docs/sdk-api-do-payment
-  baseURL: https://pgw.2c2p.com/payment/4.3
-  properties:
-  - url: https://developer.2c2p.com/docs/sdk-api-do-payment
-    type: Documentation
-  - url: https://developer.2c2p.com/reference/post_payment-4-3-payment
-    type: APIReference
-  - url: openapi/2c2p-openapi.yml
-    type: OpenAPI
-  - url: collections/2c2p.postman_collection.json
-    type: PostmanCollection
-  - url: collections/2c2p.opencollection.json
-    type: OpenCollection
-  description: Executes a payment against a paymentToken, selecting the channel
-    (card, e-wallet, QR, installment, pay-later, loyalty) via the payment code and
-    supplying card, customer, browser, and return-URL data. Supports the direct /
-    Secure Fields integration where card data is tokenized client-side.
-- aid: 2c2p:2c2p-payment-option-api
-  name: 2C2P Payment Option API
-  tags:
-  - Payment Methods
-  - Channels
-  - Localization
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.2c2p.com/docs/api-payment-option
-  baseURL: https://pgw.2c2p.com/payment/4.3
-  properties:
-  - url: https://developer.2c2p.com/docs/api-payment-option
-    type: Documentation
-  - url: https://developer.2c2p.com/reference/post_payment-4-3-paymentoption
-    type: APIReference
-  - url: openapi/2c2p-openapi.yml
-    type: OpenAPI
-  - url: collections/2c2p.postman_collection.json
-    type: PostmanCollection
-  - url: collections/2c2p.opencollection.json
-    type: OpenCollection
-  description: Returns the payment options and channel details available for a given
-    paymentToken - the payment methods, groupings, and per-channel metadata used to
-    render a custom checkout. Includes paymentOption and paymentOptionDetails.
-- aid: 2c2p:2c2p-payment-inquiry-api
-  name: 2C2P Payment Inquiry API
-  tags:
-  - Transaction Status
-  - Reconciliation
-  - Inquiry
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.2c2p.com/docs/api-payment-inquiry
-  baseURL: https://pgw.2c2p.com/payment/4.3
-  properties:
-  - url: https://developer.2c2p.com/docs/api-payment-inquiry
-    type: Documentation
-  - url: https://developer.2c2p.com/reference/post_payment-4-3-paymentinquiry
-    type: APIReference
-  - url: openapi/2c2p-openapi.yml
-    type: OpenAPI
-  - url: collections/2c2p.postman_collection.json
-    type: PostmanCollection
-  - url: collections/2c2p.opencollection.json
-    type: OpenCollection
-  description: Retrieves the full result of a transaction by merchantID and
-    invoiceNo (or paymentToken via transactionStatus), returning amount, status,
-    approval and reference codes, masked account/card token, installment, and FX
-    details. JWT request and response.
-- aid: 2c2p:2c2p-payment-maintenance-api
-  name: 2C2P Payment Maintenance API
-  tags:
-  - Refund
-  - Void
-  - Settlement
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.2c2p.com/docs/payment-maintenance-refund-guide
-  baseURL: https://pgw.2c2p.com/payment/4.3
-  properties:
-  - url: https://developer.2c2p.com/docs/payment-maintenance-refund-guide
-    type: Documentation
-  - url: https://developer.2c2p.com/reference/post_payment-4-3-canceltransaction
-    type: APIReference
-  - url: openapi/2c2p-openapi.yml
-    type: OpenAPI
-  - url: collections/2c2p.postman_collection.json
-    type: PostmanCollection
-  - url: collections/2c2p.opencollection.json
-    type: OpenCollection
-  description: Post-authorization maintenance - void/cancel a transaction via
-    cancelTransaction, plus refund and settle operations covered by the payment
-    maintenance guides. JWT request and response signed with the merchant secret
-    key.
-- aid: 2c2p:2c2p-card-token-recurring-api
-  name: 2C2P Card Token & Recurring API
-  tags:
-  - Tokenization
-  - Recurring
-  - Installments
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide
-  baseURL: https://pgw.2c2p.com/payment/4.3
-  properties:
-  - url: https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide
-    type: Documentation
-  - url: https://developer.2c2p.com/reference/post_payment-4-3-cardtokeninfo
-    type: APIReference
-  - url: openapi/2c2p-openapi.yml
-    type: OpenAPI
-  - url: collections/2c2p.postman_collection.json
-    type: PostmanCollection
-  - url: collections/2c2p.opencollection.json
-    type: OpenCollection
-  description: Card tokenization and stored-credential operations - cardTokenInfo
-    for saved card tokens and cardInstallmentPlanInfo for installment plans -
-    together with the recurring payment plans used for subscriptions and returning
-    buyers.
-- aid: 2c2p:2c2p-exchange-rate-api
-  name: 2C2P Exchange Rate API
-  tags:
-  - FX
-  - Currency
-  - DCC
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.2c2p.com/reference/post_payment-4-3-exchangerate
-  baseURL: https://pgw.2c2p.com/payment/4.3
-  properties:
-  - url: https://developer.2c2p.com/reference/post_payment-4-3-exchangerate
-    type: APIReference
-  - url: openapi/2c2p-openapi.yml
-    type: OpenAPI
-  - url: collections/2c2p.postman_collection.json
-    type: PostmanCollection
-  - url: collections/2c2p.opencollection.json
-    type: OpenCollection
-  description: Retrieves currency exchange rates for a transaction, supporting
-    dynamic currency conversion (DCC) and alternative-payment-method MCC exchange
-    rates. JWT request and response, with a JWT+JWS secured variant available.
 - aid: 2c2p:2c2p-secure-fields-api
   name: 2C2P Secure Fields
   tags:
@@ -206,10 +54,290 @@ apis:
     type: Documentation
   - url: https://developer.2c2p.com/docs/sdk-download-securepay
     type: SDK
-  description: Browser-side card capture that loads 2C2P-hosted input elements into
-    the merchant's own checkout page, returning an encryptedCardInfo /
-    securePayToken that is passed to the Do Payment (or SecurePay) API so raw PAN
-    never touches the merchant server. Reduces merchant PCI scope.
+  description: >-
+    Browser-side card capture that loads 2C2P-hosted input elements into the merchant's own checkout page,
+    returning an encryptedCardInfo / securePayToken that is passed to the Do Payment (or SecurePay) API
+    so raw PAN never touches the merchant server. Reduces merchant PCI scope.
+- aid: 2c2p:2c2p-do-payment-api
+  name: 2C2P Do Payment API
+  description: Execute a payment against a paymentToken.
+  humanURL: https://developer.2c2p.com/docs/api-payment-token
+  baseURL: https://pgw.2c2p.com/payment/4.3
+  tags:
+  - Do Payment
+  properties:
+  - type: OpenAPI
+    url: openapi/2c2p-do-payment-api-openapi.yml
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-token
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymenttoken
+  - type: PostmanCollection
+    url: collections/2c2p.postman_collection.json
+  - type: OpenCollection
+    url: collections/2c2p.opencollection.json
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/sdk-api-do-payment
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-payment
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-option
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentoption
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-inquiry
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentinquiry
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-refund-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-canceltransaction
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-cardtokeninfo
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-exchangerate
+- aid: 2c2p:2c2p-exchange-rate-api
+  name: 2C2P Exchange Rate API
+  description: Currency exchange rates for DCC / cross-border.
+  humanURL: https://developer.2c2p.com/docs/api-payment-token
+  baseURL: https://pgw.2c2p.com/payment/4.3
+  tags:
+  - Exchange Rate
+  properties:
+  - type: OpenAPI
+    url: openapi/2c2p-exchange-rate-api-openapi.yml
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-token
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymenttoken
+  - type: PostmanCollection
+    url: collections/2c2p.postman_collection.json
+  - type: OpenCollection
+    url: collections/2c2p.opencollection.json
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/sdk-api-do-payment
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-payment
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-option
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentoption
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-inquiry
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentinquiry
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-refund-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-canceltransaction
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-cardtokeninfo
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-exchangerate
+- aid: 2c2p:2c2p-inquiry-api
+  name: 2C2P Inquiry API
+  description: Query transaction result and status.
+  humanURL: https://developer.2c2p.com/docs/api-payment-token
+  baseURL: https://pgw.2c2p.com/payment/4.3
+  tags:
+  - Inquiry
+  properties:
+  - type: OpenAPI
+    url: openapi/2c2p-inquiry-api-openapi.yml
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-token
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymenttoken
+  - type: PostmanCollection
+    url: collections/2c2p.postman_collection.json
+  - type: OpenCollection
+    url: collections/2c2p.opencollection.json
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/sdk-api-do-payment
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-payment
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-option
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentoption
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-inquiry
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentinquiry
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-refund-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-canceltransaction
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-cardtokeninfo
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-exchangerate
+- aid: 2c2p:2c2p-maintenance-api
+  name: 2C2P Maintenance API
+  description: Void / cancel, refund, and settle operations.
+  humanURL: https://developer.2c2p.com/docs/api-payment-token
+  baseURL: https://pgw.2c2p.com/payment/4.3
+  tags:
+  - Maintenance
+  properties:
+  - type: OpenAPI
+    url: openapi/2c2p-maintenance-api-openapi.yml
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-token
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymenttoken
+  - type: PostmanCollection
+    url: collections/2c2p.postman_collection.json
+  - type: OpenCollection
+    url: collections/2c2p.opencollection.json
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/sdk-api-do-payment
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-payment
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-option
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentoption
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-inquiry
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentinquiry
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-refund-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-canceltransaction
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-cardtokeninfo
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-exchangerate
+- aid: 2c2p:2c2p-payment-option-api
+  name: 2C2P Payment Option API
+  description: Retrieve available payment options and channel details.
+  humanURL: https://developer.2c2p.com/docs/api-payment-token
+  baseURL: https://pgw.2c2p.com/payment/4.3
+  tags:
+  - Payment Option
+  properties:
+  - type: OpenAPI
+    url: openapi/2c2p-payment-option-api-openapi.yml
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-token
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymenttoken
+  - type: PostmanCollection
+    url: collections/2c2p.postman_collection.json
+  - type: OpenCollection
+    url: collections/2c2p.opencollection.json
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/sdk-api-do-payment
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-payment
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-option
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentoption
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-inquiry
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentinquiry
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-refund-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-canceltransaction
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-cardtokeninfo
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-exchangerate
+- aid: 2c2p:2c2p-payment-token-api
+  name: 2C2P Payment Token API
+  description: Initialize a payment and obtain a paymentToken.
+  humanURL: https://developer.2c2p.com/docs/api-payment-token
+  baseURL: https://pgw.2c2p.com/payment/4.3
+  tags:
+  - Payment Token
+  properties:
+  - type: OpenAPI
+    url: openapi/2c2p-payment-token-api-openapi.yml
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-token
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymenttoken
+  - type: PostmanCollection
+    url: collections/2c2p.postman_collection.json
+  - type: OpenCollection
+    url: collections/2c2p.opencollection.json
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/sdk-api-do-payment
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-payment
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-option
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentoption
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-inquiry
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentinquiry
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-refund-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-canceltransaction
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-cardtokeninfo
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-exchangerate
+- aid: 2c2p:2c2p-tokens-api
+  name: 2C2P Tokens API
+  description: Card token and installment plan information.
+  humanURL: https://developer.2c2p.com/docs/api-payment-token
+  baseURL: https://pgw.2c2p.com/payment/4.3
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/2c2p-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-token
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymenttoken
+  - type: PostmanCollection
+    url: collections/2c2p.postman_collection.json
+  - type: OpenCollection
+    url: collections/2c2p.opencollection.json
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/sdk-api-do-payment
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-payment
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-option
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentoption
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/api-payment-inquiry
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-paymentinquiry
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-refund-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-canceltransaction
+  - type: Documentation
+    url: https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-cardtokeninfo
+  - type: APIReference
+    url: https://developer.2c2p.com/reference/post_payment-4-3-exchangerate
 common:
 - type: AgenticAccess
   url: agentic-access/2c2p-agentic-access.yml
