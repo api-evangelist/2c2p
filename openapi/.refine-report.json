@@ -1,0 +1,26 @@
+{
+  "provider": "2c2p",
+  "sources": [
+    "2c2p-do-payment-api-openapi.yml",
+    "2c2p-exchange-rate-api-openapi.yml",
+    "2c2p-inquiry-api-openapi.yml",
+    "2c2p-maintenance-api-openapi.yml",
+    "2c2p-payment-option-api-openapi.yml",
+    "2c2p-payment-token-api-openapi.yml",
+    "2c2p-tokens-api-openapi.yml"
+  ],
+  "outputs": [
+    "2c2p-do-payment-api-openapi.yml",
+    "2c2p-exchange-rate-api-openapi.yml",
+    "2c2p-inquiry-api-openapi.yml",
+    "2c2p-maintenance-api-openapi.yml",
+    "2c2p-payment-option-api-openapi.yml",
+    "2c2p-payment-token-api-openapi.yml",
+    "2c2p-tokens-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
