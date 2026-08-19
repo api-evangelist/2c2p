@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "2C2P Payment Gateway API (PGW v4.3) Do Payment Tokens API",
+    "version": "4.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Card token info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pgw.2c2p.com/payment/4.3/cardTokenInfo",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves information about a stored card token for recurring / returning-buyer use."
+        },
+        {
+          "info": {
+            "name": "Card installment plan info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pgw.2c2p.com/payment/4.3/cardInstallmentPlanInfo",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the available installment plans for a card / merchant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

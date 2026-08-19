@@ -1,0 +1,123 @@
+{
+  "item": [
+    {
+      "id": "29a03d75-fa8a-4212-97d5-9476e87ba62b",
+      "name": "Maintenance",
+      "description": {
+        "content": "Void / cancel, refund, and settle operations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "991806fc-3345-464d-a9df-ed15d4e46a06",
+          "name": "Cancel / void a transaction",
+          "request": {
+            "name": "Cancel / void a transaction",
+            "description": {
+              "content": "Voids or cancels a transaction. Refund and settle operations are covered by the 2C2P payment maintenance guides.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cancelTransaction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantID\": \"<string>\",\n  \"invoiceNo\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1953f8e-4639-4984-897b-f7496842117a",
+              "name": "Decoded cancel/void response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantID\": \"<string>\",\n  \"invoiceNo\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"respCode\": \"string\",\n  \"respDesc\": \"string\",\n  \"key_0\": 8940,\n  \"key_1\": 8801\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pgw.2c2p.com/payment/4.3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ecd685f9-bb7d-4a57-a297-20baf3e1cbe3",
+    "name": "2C2P Payment Gateway API (PGW v4.3) Do Payment Maintenance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-to-server REST interface for the 2C2P Payment Gateway. Every operation is an HTTPS POST under /payment/4.3/. IMPORTANT: on the wire, each request and response body is a single JSON Web Token (JWS) signed with the merchant's Secret Key using HMAC SHA-256 - the merchant is identified by the merchantID inside the signed payload, and there is no HTTP Authorization header. For readability this document models the DECODED JSON payloads (request `payload` and response `payload`) rather than the raw JWT string. The field schemas here are MODELED from the documented parameters and are a representative subset, not a byte-for-byte copy of 2C2P's contract; verify exact fields against developer.2c2p.com. Endpoint paths are confirmed from the 2C2P developer reference index.\n\nContact Support:\n Name: 2C2P Developer",
+      "type": "text/plain"
+    }
+  }
+}

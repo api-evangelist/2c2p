@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "2C2P Payment Gateway API (PGW v4.3) Do Payment Payment Token API",
+    "version": "4.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Token",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a payment token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pgw.2c2p.com/payment/4.3/paymentToken",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initializes a payment and returns a paymentToken plus a webPaymentUrl for the hosted payment page. On the wire the request/response are JWTs (HS256, merchant secret key); the decoded payloads are modeled here."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,214 @@
+{
+  "item": [
+    {
+      "id": "34d03957-b9f3-4311-afb8-481ea5313174",
+      "name": "Tokens",
+      "description": {
+        "content": "Card token and installment plan information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "61cf8197-772c-4acd-8651-5d46612af5ef",
+          "name": "Card token info",
+          "request": {
+            "name": "Card token info",
+            "description": {
+              "content": "Retrieves information about a stored card token for recurring / returning-buyer use.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardTokenInfo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantID\": \"<string>\",\n  \"cardToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62d9baa7-218f-4065-a485-9e3d4ffa0ff2",
+              "name": "Decoded card token info response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardTokenInfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantID\": \"<string>\",\n  \"cardToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"respCode\": \"string\",\n  \"respDesc\": \"string\",\n  \"key_0\": \"string\",\n  \"key_1\": 1476,\n  \"key_2\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47e3059e-d039-4763-96d2-5e4c3c381685",
+          "name": "Card installment plan info",
+          "request": {
+            "name": "Card installment plan info",
+            "description": {
+              "content": "Returns the available installment plans for a card / merchant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardInstallmentPlanInfo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantID\": \"<string>\",\n  \"invoiceNo\": \"<string>\",\n  \"paymentToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d1888bd-7e7c-45f8-8942-4fcb9c9e6f9f",
+              "name": "Decoded installment plan info response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardInstallmentPlanInfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantID\": \"<string>\",\n  \"invoiceNo\": \"<string>\",\n  \"paymentToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"respCode\": \"string\",\n  \"respDesc\": \"string\",\n  \"key_0\": \"string\",\n  \"key_1\": 1476,\n  \"key_2\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pgw.2c2p.com/payment/4.3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "11d49058-2c1f-466e-b2cb-19897e14cd08",
+    "name": "2C2P Payment Gateway API (PGW v4.3) Do Payment Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-to-server REST interface for the 2C2P Payment Gateway. Every operation is an HTTPS POST under /payment/4.3/. IMPORTANT: on the wire, each request and response body is a single JSON Web Token (JWS) signed with the merchant's Secret Key using HMAC SHA-256 - the merchant is identified by the merchantID inside the signed payload, and there is no HTTP Authorization header. For readability this document models the DECODED JSON payloads (request `payload` and response `payload`) rather than the raw JWT string. The field schemas here are MODELED from the documented parameters and are a representative subset, not a byte-for-byte copy of 2C2P's contract; verify exact fields against developer.2c2p.com. Endpoint paths are confirmed from the 2C2P developer reference index.\n\nContact Support:\n Name: 2C2P Developer",
+      "type": "text/plain"
+    }
+  }
+}

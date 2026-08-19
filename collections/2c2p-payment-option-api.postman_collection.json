@@ -1,0 +1,214 @@
+{
+  "item": [
+    {
+      "id": "07e96d04-4d1e-4854-b416-e2d134171375",
+      "name": "Payment Option",
+      "description": {
+        "content": "Retrieve available payment options and channel details.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9fdee4c0-8fc9-4e82-8292-64d858d73bdf",
+          "name": "Get payment options",
+          "request": {
+            "name": "Get payment options",
+            "description": {
+              "content": "Returns the payment options / channels available for a paymentToken.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paymentOption"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c1e26f0-bfe2-466f-b0b3-be593f7ff7ea",
+              "name": "Decoded payment option response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentOption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"respCode\": \"string\",\n  \"respDesc\": \"string\",\n  \"key_0\": 1739.7674935928599\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7b08e66-2ed8-4462-aae9-2c6ad73eae88",
+          "name": "Get payment option details",
+          "request": {
+            "name": "Get payment option details",
+            "description": {
+              "content": "Returns detailed metadata for a specific payment option / channel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paymentOptionDetails"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "91f6f9a2-462b-45d4-8fa0-ba979d201a28",
+              "name": "Decoded payment option details response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentOptionDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"respCode\": \"string\",\n  \"respDesc\": \"string\",\n  \"key_0\": 1739.7674935928599\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pgw.2c2p.com/payment/4.3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "98e090e4-bcdd-4168-8225-1f0c45da1745",
+    "name": "2C2P Payment Gateway API (PGW v4.3) Do Payment Payment Option API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-to-server REST interface for the 2C2P Payment Gateway. Every operation is an HTTPS POST under /payment/4.3/. IMPORTANT: on the wire, each request and response body is a single JSON Web Token (JWS) signed with the merchant's Secret Key using HMAC SHA-256 - the merchant is identified by the merchantID inside the signed payload, and there is no HTTP Authorization header. For readability this document models the DECODED JSON payloads (request `payload` and response `payload`) rather than the raw JWT string. The field schemas here are MODELED from the documented parameters and are a representative subset, not a byte-for-byte copy of 2C2P's contract; verify exact fields against developer.2c2p.com. Endpoint paths are confirmed from the 2C2P developer reference index.\n\nContact Support:\n Name: 2C2P Developer",
+      "type": "text/plain"
+    }
+  }
+}

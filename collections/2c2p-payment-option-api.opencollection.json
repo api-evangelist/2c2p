@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "2C2P Payment Gateway API (PGW v4.3) Do Payment Payment Option API",
+    "version": "4.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Option",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get payment options",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pgw.2c2p.com/payment/4.3/paymentOption",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the payment options / channels available for a paymentToken."
+        },
+        {
+          "info": {
+            "name": "Get payment option details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pgw.2c2p.com/payment/4.3/paymentOptionDetails",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns detailed metadata for a specific payment option / channel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

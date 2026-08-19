@@ -1,0 +1,123 @@
+{
+  "item": [
+    {
+      "id": "95419e4e-2838-4ebc-9727-465ba18864b8",
+      "name": "Payment Token",
+      "description": {
+        "content": "Initialize a payment and obtain a paymentToken.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6ce2752-9b9a-47be-941d-68410de3d730",
+          "name": "Create a payment token",
+          "request": {
+            "name": "Create a payment token",
+            "description": {
+              "content": "Initializes a payment and returns a paymentToken plus a webPaymentUrl for the hosted payment page. On the wire the request/response are JWTs (HS256, merchant secret key); the decoded payloads are modeled here.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paymentToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantID\": \"<string>\",\n  \"invoiceNo\": \"<string>\",\n  \"description\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currencyCode\": \"<string>\",\n  \"paymentChannel\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tokenize\": \"<boolean>\",\n  \"cardTokens\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"recurring\": \"<boolean>\",\n  \"invoicePrefix\": \"<string>\",\n  \"frontendReturnUrl\": \"<uri>\",\n  \"backendReturnUrl\": \"<uri>\",\n  \"locale\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c3352c39-1a7d-4f32-bdc0-3091e1c38ff5",
+              "name": "Decoded payment token response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantID\": \"<string>\",\n  \"invoiceNo\": \"<string>\",\n  \"description\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currencyCode\": \"<string>\",\n  \"paymentChannel\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tokenize\": \"<boolean>\",\n  \"cardTokens\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"recurring\": \"<boolean>\",\n  \"invoicePrefix\": \"<string>\",\n  \"frontendReturnUrl\": \"<uri>\",\n  \"backendReturnUrl\": \"<uri>\",\n  \"locale\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webPaymentUrl\": \"https://fIaZTuFFBCBVraqjr.lwGvezs,kocTzdtFwTc40j83nrlOrnYsBPEN9c5m6J,wf\",\n  \"paymentToken\": \"string\",\n  \"respCode\": \"string\",\n  \"respDesc\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pgw.2c2p.com/payment/4.3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0c9cbc7d-402b-4a0c-856a-663363765e5d",
+    "name": "2C2P Payment Gateway API (PGW v4.3) Do Payment Payment Token API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-to-server REST interface for the 2C2P Payment Gateway. Every operation is an HTTPS POST under /payment/4.3/. IMPORTANT: on the wire, each request and response body is a single JSON Web Token (JWS) signed with the merchant's Secret Key using HMAC SHA-256 - the merchant is identified by the merchantID inside the signed payload, and there is no HTTP Authorization header. For readability this document models the DECODED JSON payloads (request `payload` and response `payload`) rather than the raw JWT string. The field schemas here are MODELED from the documented parameters and are a representative subset, not a byte-for-byte copy of 2C2P's contract; verify exact fields against developer.2c2p.com. Endpoint paths are confirmed from the 2C2P developer reference index.\n\nContact Support:\n Name: 2C2P Developer",
+      "type": "text/plain"
+    }
+  }
+}

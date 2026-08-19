@@ -1,0 +1,214 @@
+{
+  "item": [
+    {
+      "id": "b1fc64e3-e14b-41bb-8fa7-eb6e240e6e7f",
+      "name": "Inquiry",
+      "description": {
+        "content": "Query transaction result and status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24455417-3211-4377-ab4d-af61d928179c",
+          "name": "Payment inquiry",
+          "request": {
+            "name": "Payment inquiry",
+            "description": {
+              "content": "Retrieves the full result of a transaction by merchantID + invoiceNo, returning amount, status, approval / reference codes, masked account / card token, installment, and FX details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paymentInquiry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantID\": \"<string>\",\n  \"invoiceNo\": \"<string>\",\n  \"paymentToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a08191e6-f183-4bce-a3f3-acfd3039451d",
+              "name": "Decoded payment inquiry response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentInquiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantID\": \"<string>\",\n  \"invoiceNo\": \"<string>\",\n  \"paymentToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"merchantID\": \"string\",\n  \"invoiceNo\": \"string\",\n  \"amount\": 1606.9388364442416,\n  \"currencyCode\": \"string\",\n  \"transactionDateTime\": \"string\",\n  \"agentCode\": \"string\",\n  \"channelCode\": \"string\",\n  \"approvalCode\": \"string\",\n  \"referenceNo\": \"string\",\n  \"accountNo\": \"string\",\n  \"cardToken\": \"string\",\n  \"installmentPeriod\": 4996,\n  \"interestRate\": 2085.427191446857,\n  \"fxAmount\": 6204.63151529527,\n  \"fxRate\": 5629.906048290577,\n  \"fxCurrencyCode\": \"string\",\n  \"transactionStatus\": \"string\",\n  \"respCode\": \"string\",\n  \"respDesc\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b9b6c30-34c9-467e-8bc5-3488a452833e",
+          "name": "Transaction status",
+          "request": {
+            "name": "Transaction status",
+            "description": {
+              "content": "Returns the current status of a transaction by paymentToken or invoiceNo.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactionStatus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantID\": \"<string>\",\n  \"invoiceNo\": \"<string>\",\n  \"paymentToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da70c24b-de66-473e-b0f0-f36d8eac32d6",
+              "name": "Decoded transaction status response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactionStatus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantID\": \"<string>\",\n  \"invoiceNo\": \"<string>\",\n  \"paymentToken\": \"<string>\",\n  \"locale\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"merchantID\": \"string\",\n  \"invoiceNo\": \"string\",\n  \"amount\": 1606.9388364442416,\n  \"currencyCode\": \"string\",\n  \"transactionDateTime\": \"string\",\n  \"agentCode\": \"string\",\n  \"channelCode\": \"string\",\n  \"approvalCode\": \"string\",\n  \"referenceNo\": \"string\",\n  \"accountNo\": \"string\",\n  \"cardToken\": \"string\",\n  \"installmentPeriod\": 4996,\n  \"interestRate\": 2085.427191446857,\n  \"fxAmount\": 6204.63151529527,\n  \"fxRate\": 5629.906048290577,\n  \"fxCurrencyCode\": \"string\",\n  \"transactionStatus\": \"string\",\n  \"respCode\": \"string\",\n  \"respDesc\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pgw.2c2p.com/payment/4.3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "32e105e0-97f8-4166-b6e8-767d34c110c6",
+    "name": "2C2P Payment Gateway API (PGW v4.3) Do Payment Inquiry API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-to-server REST interface for the 2C2P Payment Gateway. Every operation is an HTTPS POST under /payment/4.3/. IMPORTANT: on the wire, each request and response body is a single JSON Web Token (JWS) signed with the merchant's Secret Key using HMAC SHA-256 - the merchant is identified by the merchantID inside the signed payload, and there is no HTTP Authorization header. For readability this document models the DECODED JSON payloads (request `payload` and response `payload`) rather than the raw JWT string. The field schemas here are MODELED from the documented parameters and are a representative subset, not a byte-for-byte copy of 2C2P's contract; verify exact fields against developer.2c2p.com. Endpoint paths are confirmed from the 2C2P developer reference index.\n\nContact Support:\n Name: 2C2P Developer",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "2C2P Payment Gateway API (PGW v4.3) Do Payment Inquiry API",
+    "version": "4.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inquiry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Payment inquiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pgw.2c2p.com/payment/4.3/paymentInquiry",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the full result of a transaction by merchantID + invoiceNo, returning amount, status, approval / reference codes, masked account / card token, installment, and FX details."
+        },
+        {
+          "info": {
+            "name": "Transaction status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pgw.2c2p.com/payment/4.3/transactionStatus",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the current status of a transaction by paymentToken or invoiceNo."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
