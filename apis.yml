@@ -11,6 +11,18 @@ description: 2C2P is a Singapore-headquartered payments platform serving merchan
   recurring payments, transaction inquiry and status, void/cancel and refund
   maintenance, currency exchange, and backend (server-to-server) payment
   notifications. 2C2P is part of Ant International.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
