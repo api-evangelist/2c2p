@@ -58,6 +58,14 @@ paths:
                 $ref: '#/components/schemas/GenericResponse'
 components:
   schemas:
+    GenericResponse:
+      type: object
+      properties:
+        respCode:
+          type: string
+        respDesc:
+          type: string
+      additionalProperties: true
     PaymentOptionRequest:
       type: object
       required:
@@ -67,11 +75,3 @@ components:
           type: string
         locale:
           type: string
-    GenericResponse:
-      type: object
-      properties:
-        respCode:
-          type: string
-        respDesc:
-          type: string
-      additionalProperties: true

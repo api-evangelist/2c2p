@@ -38,20 +38,6 @@ paths:
                 $ref: '#/components/schemas/PaymentTokenResponse'
 components:
   schemas:
-    PaymentTokenResponse:
-      type: object
-      properties:
-        webPaymentUrl:
-          type: string
-          format: uri
-          description: Hosted payment page URL to redirect the customer to.
-        paymentToken:
-          type: string
-        respCode:
-          type: string
-          description: Response code, e.g. "0000" for success.
-        respDesc:
-          type: string
     PaymentTokenRequest:
       type: object
       required:
@@ -100,4 +86,18 @@ components:
           format: uri
           description: Server-to-server notification (webhook) URL.
         locale:
+          type: string
+    PaymentTokenResponse:
+      type: object
+      properties:
+        webPaymentUrl:
+          type: string
+          format: uri
+          description: Hosted payment page URL to redirect the customer to.
+        paymentToken:
+          type: string
+        respCode:
+          type: string
+          description: Response code, e.g. "0000" for success.
+        respDesc:
           type: string

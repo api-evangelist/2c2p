@@ -38,6 +38,14 @@ paths:
                 $ref: '#/components/schemas/GenericResponse'
 components:
   schemas:
+    GenericResponse:
+      type: object
+      properties:
+        respCode:
+          type: string
+        respDesc:
+          type: string
+      additionalProperties: true
     ExchangeRateRequest:
       type: object
       required:
@@ -52,11 +60,3 @@ components:
           type: number
         currencyCode:
           type: string
-    GenericResponse:
-      type: object
-      properties:
-        respCode:
-          type: string
-        respDesc:
-          type: string
-      additionalProperties: true
