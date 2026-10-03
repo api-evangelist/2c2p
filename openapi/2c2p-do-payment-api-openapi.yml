@@ -38,20 +38,6 @@ paths:
                 $ref: '#/components/schemas/DoPaymentResponse'
 components:
   schemas:
-    DoPaymentResponse:
-      type: object
-      properties:
-        respCode:
-          type: string
-        respDesc:
-          type: string
-        data:
-          type: string
-          description: Redirect / 3DS / channel action data where applicable.
-        channelCode:
-          type: string
-        invoiceNo:
-          type: string
     DoPaymentRequest:
       type: object
       required:
@@ -83,3 +69,17 @@ components:
         browserDetails:
           type: object
           additionalProperties: true
+    DoPaymentResponse:
+      type: object
+      properties:
+        respCode:
+          type: string
+        respDesc:
+          type: string
+        data:
+          type: string
+          description: Redirect / 3DS / channel action data where applicable.
+        channelCode:
+          type: string
+        invoiceNo:
+          type: string

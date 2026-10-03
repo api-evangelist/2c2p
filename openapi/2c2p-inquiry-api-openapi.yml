@@ -58,19 +58,6 @@ paths:
                 $ref: '#/components/schemas/PaymentInquiryResponse'
 components:
   schemas:
-    PaymentInquiryRequest:
-      type: object
-      required:
-      - merchantID
-      properties:
-        merchantID:
-          type: string
-        invoiceNo:
-          type: string
-        paymentToken:
-          type: string
-        locale:
-          type: string
     PaymentInquiryResponse:
       type: object
       properties:
@@ -112,4 +99,17 @@ components:
         respCode:
           type: string
         respDesc:
+          type: string
+    PaymentInquiryRequest:
+      type: object
+      required:
+      - merchantID
+      properties:
+        merchantID:
+          type: string
+        invoiceNo:
+          type: string
+        paymentToken:
+          type: string
+        locale:
           type: string

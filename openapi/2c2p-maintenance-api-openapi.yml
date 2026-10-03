@@ -38,14 +38,6 @@ paths:
                 $ref: '#/components/schemas/GenericResponse'
 components:
   schemas:
-    GenericResponse:
-      type: object
-      properties:
-        respCode:
-          type: string
-        respDesc:
-          type: string
-      additionalProperties: true
     CancelTransactionRequest:
       type: object
       required:
@@ -56,3 +48,11 @@ components:
           type: string
         invoiceNo:
           type: string
+    GenericResponse:
+      type: object
+      properties:
+        respCode:
+          type: string
+        respDesc:
+          type: string
+      additionalProperties: true
