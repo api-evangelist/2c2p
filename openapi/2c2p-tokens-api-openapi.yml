@@ -58,19 +58,6 @@ paths:
                 $ref: '#/components/schemas/GenericResponse'
 components:
   schemas:
-    PaymentInquiryRequest:
-      type: object
-      required:
-      - merchantID
-      properties:
-        merchantID:
-          type: string
-        invoiceNo:
-          type: string
-        paymentToken:
-          type: string
-        locale:
-          type: string
     CardTokenInfoRequest:
       type: object
       required:
@@ -91,3 +78,16 @@ components:
         respDesc:
           type: string
       additionalProperties: true
+    PaymentInquiryRequest:
+      type: object
+      required:
+      - merchantID
+      properties:
+        merchantID:
+          type: string
+        invoiceNo:
+          type: string
+        paymentToken:
+          type: string
+        locale:
+          type: string
