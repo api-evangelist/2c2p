@@ -63,7 +63,7 @@ tags_raw:
 - Cross-Border
 - Fintech
 created: '2026-07-12'
-modified: '2026-07-12'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: 2c2p:2c2p-secure-fields-api
@@ -369,6 +369,10 @@ apis:
   - type: APIReference
     url: https://developer.2c2p.com/reference/post_payment-4-3-exchangerate
 common:
+- url: https://2c2p.com/news/
+  type: Blog
+- url: https://2c2p.com/news/feed/
+  type: BlogRSS
 - type: AgenticAccess
   url: agentic-access/2c2p-agentic-access.yml
 - type: DomainSecurity
