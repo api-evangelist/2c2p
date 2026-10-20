@@ -96,3 +96,35 @@
     detected: '2026-10-20'
   status: not-a-workflow
   arazzo: null
+- slug: 2c2p-emvco-approved-products-acceptance-devices
+  label: 'EMVCo (Approved Products: acceptance devices)'
+  partner_name: 'EMVCo (Approved Products: acceptance devices)'
+  category: Card acceptance type approval
+  type: register
+  channel: standard-directory
+  evidence: https://www.emvco.com/approved-products/emv1-0/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: EMVCo Approved Products, Acceptance Device (emvco.com/approved-products-search)
+    standard: EMVCo
+    spec_file: null
+    role: emvco-approved-acceptance-device-vendor
+    registered_name: 2C2P Pte Ltd
+    register_id: https://www.emvco.com/approved-products/emv1-0/
+    matched_domain: null
+    matched_by: register-name
+    identity_source: register-name
+    identity_note: register-name '2c2p' = 2c2p; no wikidata P856
+    certified_products:
+    - product: EMVCo L2 Contact Kernels
+      approval_type: L2 Contact Kernels
+      lapsed: true
+      latest_valid_to: '2015-11-26'
+    signal_note: certified_products = one entry per EMVCo acceptance-device approval TYPE (L1 contact IFM, L1 contactless
+      PCD, L2 contact kernel, contactless product, C-8 kernel, terminal ESD); lapsed = every approval of that type
+      is past its valid-to date; approval / product / version counts are never recorded or counted
+    detected_by: sweep-emv-card-terminals.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
