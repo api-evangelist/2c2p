@@ -1,4 +1,4 @@
-# 2C2P (2c2p)
+# 2C2P
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,132 +64,130 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-2C2P is a Singapore-headquartered payments platform serving merchants across Southeast Asia and beyond. Its Payment Gateway (PGW) API - currently **Payment v4.3** - lets merchants accept cards, e-wallets, QR, installments, and alternative payment methods through a server-to-server REST interface. 2C2P is part of Ant International.
+2C2P is a Singapore-headquartered payments platform serving merchants across Southeast Asia and beyond. Its Payment Gateway (PGW) API - currently Payment v4.3 - lets merchants accept cards, e-wallets, QR, installments, and alternative payment methods via a server-to-server REST interface where every request and response body is a JWT (JWS) signed with the merchant's secret key. The platform covers hosted-page and Secure Fields (direct) card capture, tokenization and recurring payments, transaction inquiry and status, void/cancel and refund maintenance, currency exchange, and backend (server-to-server) payment notifications. 2C2P is part of Ant International.
 
-## Access Model (Read This First)
+**Areas:** Payments · Payment Gateway · Southeast Asia · Singapore · Thailand · Cards · Digital Wallet · Payment Token · Cross-Border · Fintech
 
-- **Merchant onboarding, not self-serve keys.** Production access requires a 2C2P merchant account (commercial onboarding / KYC). 2C2P issues a **Merchant ID** and a **Secret Key** from the merchant profile - there is no public "get an API key" button in the docs.
-- **JWT-signed requests.** The PGW API does **not** use an `Authorization` header. Every request body is a **JSON Web Token (JWS)** whose payload carries the transaction fields and whose signature authenticates the merchant. The merchant signs the JWT with its Secret Key using **HMAC SHA-256 (HS256)**; 2C2P returns a JWT signed the same way, which the merchant verifies and decodes. The merchant is identified by the `merchantID` inside the signed payload. Select endpoints also support a JWT+JWS (asymmetric) variant.
-- **Sandbox then production.** Build and test against the sandbox, then switch hosts for production:
-  - Sandbox: `https://sandbox-pgw.2c2p.com/payment/4.3`
-  - Production: `https://pgw.2c2p.com/payment/4.3`
-- **Async results are webhooks, not sockets.** Payment outcomes are delivered as a **backend notification**: 2C2P POSTs a signed JWT to the merchant's `backendReturnUrl`, and the browser is redirected to `frontendReturnUrl`. There is no WebSocket or SSE API.
-- **PCI-reducing card capture.** With **Secure Fields**, card input elements are loaded from 2C2P directly into the merchant's checkout page, returning an `encryptedCardInfo` / `securePayToken` that is submitted inside the signed Do Payment request - raw PAN never touches the merchant server.
+## 2C2P on APIs.io
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/2c2p/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/2c2p/refs/heads/main/apis.yml)
+Everything profiled for 2C2P is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/2c2p/](https://apis.io/providers/2c2p/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (8)
 
-- Payments
-- Payment Gateway
-- Southeast Asia
-- Singapore
-- Thailand
-- Cards
-- E-Wallet
-- Payment Token
-- Cross-Border
-- Fintech
+- [2C2P Secure Fields](https://apis.io/apis/2c2p/2c2p-secure-fields-api/) — Browser-side card capture that loads 2C2P-hosted input elements into the merchant's own checkout page, returning an encryptedCardInfo / securePayToken that…
+- [2C2P Do Payment API](https://apis.io/apis/2c2p/2c2p-do-payment-api/) — Execute a payment against a paymentToken.
+- [2C2P Exchange Rate API](https://apis.io/apis/2c2p/2c2p-exchange-rate-api/) — Currency exchange rates for DCC / cross-border.
+- [2C2P Inquiry API](https://apis.io/apis/2c2p/2c2p-inquiry-api/) — Query transaction result and status.
+- [2C2P Maintenance API](https://apis.io/apis/2c2p/2c2p-maintenance-api/) — Void / cancel, refund, and settle operations.
+- [2C2P Payment Option API](https://apis.io/apis/2c2p/2c2p-payment-option-api/) — Retrieve available payment options and channel details.
+- [2C2P Payment Token API](https://apis.io/apis/2c2p/2c2p-payment-token-api/) — Initialize a payment and obtain a paymentToken.
+- [2C2P Tokens API](https://apis.io/apis/2c2p/2c2p-tokens-api/) — Card token and installment plan information.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-12
-- **Modified:** 2026-07-12
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-All PGW v4.3 operations are HTTPS `POST` with JWT (JWS) request/response bodies. Base URL: `https://pgw.2c2p.com/payment/4.3` (production) or `https://sandbox-pgw.2c2p.com/payment/4.3` (sandbox).
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### 2C2P Payment Token API
+- [2C2P Agentic Access](https://apis.io/agentic-access/2c2p/2c2p-agentic-access/)
 
-Server-to-server POST that initializes a payment and returns a `paymentToken` plus a `webPaymentUrl` for the hosted payment page. Carries `invoiceNo`, `amount`, `currencyCode`, `description`, and channel / tokenize options.
+#### Collections (8)
 
-- **Human URL:** [https://developer.2c2p.com/docs/api-payment-token](https://developer.2c2p.com/docs/api-payment-token)
-- **Base URL:** `https://pgw.2c2p.com/payment/4.3`
-- Endpoint: `POST /paymentToken`
+Postman and Open Collection request collections.
 
-### 2C2P Do Payment API
+- [2C2P Payment Gateway API (PGW v4.3)](https://apis.io/collections/2c2p/open-2c2p/)
+- [2C2P Payment Gateway API (PGW v4.3) Do Payment API](https://apis.io/collections/2c2p/open-2c2p-do-payment-api/)
+- [2C2P Payment Gateway API (PGW v4.3) Do Payment Exchange Rate API](https://apis.io/collections/2c2p/open-2c2p-exchange-rate-api/)
+- [2C2P Payment Gateway API (PGW v4.3) Do Payment Inquiry API](https://apis.io/collections/2c2p/open-2c2p-inquiry-api/)
+- [2C2P Payment Gateway API (PGW v4.3) Do Payment Maintenance API](https://apis.io/collections/2c2p/open-2c2p-maintenance-api/)
+- [2C2P Payment Gateway API (PGW v4.3) Do Payment Payment Option API](https://apis.io/collections/2c2p/open-2c2p-payment-option-api/)
+- [2C2P Payment Gateway API (PGW v4.3) Do Payment Payment Token API](https://apis.io/collections/2c2p/open-2c2p-payment-token-api/)
+- [2C2P Payment Gateway API (PGW v4.3) Do Payment Tokens API](https://apis.io/collections/2c2p/open-2c2p-tokens-api/)
 
-Executes a payment against a `paymentToken`, selecting the channel (card, e-wallet, QR, installment, pay-later, loyalty) via the payment code and supplying card, customer, browser, and return-URL data. Supports the direct / Secure Fields integration.
+#### Security (2)
 
-- **Human URL:** [https://developer.2c2p.com/docs/sdk-api-do-payment](https://developer.2c2p.com/docs/sdk-api-do-payment)
-- **Base URL:** `https://pgw.2c2p.com/payment/4.3`
-- Endpoint: `POST /payment`
+Authentication, trust centre, and vulnerability disclosure.
 
-### 2C2P Payment Option API
+- [2C2P Authentication](https://apis.io/security/2c2p/2c2p-authentication/)
+- [2C2P Domain Security](https://apis.io/security/2c2p/2c2p-domain-security/)
 
-Returns the payment options and channel details available for a given `paymentToken` - methods, groupings, and per-channel metadata used to render a custom checkout (`paymentOption`, `paymentOptionDetails`).
+#### Plans and pricing (1)
 
-- **Human URL:** [https://developer.2c2p.com/docs/api-payment-option](https://developer.2c2p.com/docs/api-payment-option)
-- **Base URL:** `https://pgw.2c2p.com/payment/4.3`
-- Endpoints: `POST /paymentOption`, `POST /paymentOptionDetails`
+Published plans, tiers and prices.
 
-### 2C2P Payment Inquiry API
+- [2C2P Plans Pricing](https://apis.io/plans/2c2p/2c2p-plans-pricing/)
 
-Retrieves the full result of a transaction by `merchantID` and `invoiceNo` (or `paymentToken` via `transactionStatus`), returning amount, status, approval and reference codes, masked account / card token, installment, and FX details.
+#### Rate limits (1)
 
-- **Human URL:** [https://developer.2c2p.com/docs/api-payment-inquiry](https://developer.2c2p.com/docs/api-payment-inquiry)
-- **Base URL:** `https://pgw.2c2p.com/payment/4.3`
-- Endpoints: `POST /paymentInquiry`, `POST /transactionStatus`
+Published request limits.
 
-### 2C2P Payment Maintenance API
+- [2C2P Rate Limits](https://apis.io/rate-limits/2c2p/2c2p-rate-limits/)
 
-Post-authorization maintenance - void / cancel a transaction via `cancelTransaction`, plus refund and settle operations covered by the payment maintenance guides.
+#### FinOps (1)
 
-- **Human URL:** [https://developer.2c2p.com/docs/payment-maintenance-refund-guide](https://developer.2c2p.com/docs/payment-maintenance-refund-guide)
-- **Base URL:** `https://pgw.2c2p.com/payment/4.3`
-- Endpoint: `POST /cancelTransaction`
+What the API costs to run, by operation.
 
-### 2C2P Card Token & Recurring API
+- [2C2P Finops](https://apis.io/finops/2c2p/2c2p-finops/)
 
-Card tokenization and stored-credential operations - `cardTokenInfo` for saved card tokens and `cardInstallmentPlanInfo` for installment plans - together with the recurring payment plans used for subscriptions and returning buyers.
+## Where to find this API
 
-- **Human URL:** [https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide](https://developer.2c2p.com/docs/payment-maintenance-recurring-payment-guide)
-- **Base URL:** `https://pgw.2c2p.com/payment/4.3`
-- Endpoints: `POST /cardTokenInfo`, `POST /cardInstallmentPlanInfo`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### 2C2P Exchange Rate API
-
-Retrieves currency exchange rates for a transaction, supporting dynamic currency conversion (DCC) and alternative-payment-method MCC exchange rates. A JWT+JWS secured variant is available.
-
-- **Human URL:** [https://developer.2c2p.com/reference/post_payment-4-3-exchangerate](https://developer.2c2p.com/reference/post_payment-4-3-exchangerate)
-- **Base URL:** `https://pgw.2c2p.com/payment/4.3`
-- Endpoint: `POST /exchangeRate`
-
-### 2C2P Secure Fields
-
-Browser-side card capture that loads 2C2P-hosted input elements into the merchant's own checkout page, returning an `encryptedCardInfo` / `securePayToken` that is passed to the Do Payment (or SecurePay) API so raw PAN never touches the merchant server. Reduces merchant PCI scope.
-
-- **Human URL:** [https://developer.2c2p.com/docs/using-securefields](https://developer.2c2p.com/docs/using-securefields)
-- **Base URL:** `https://pgw.2c2p.com`
-
-## Artifacts
-
-- [OpenAPI](openapi/2c2p-openapi.yml) — models the decoded JSON payloads for the confirmed PGW v4.3 endpoints (real requests/responses are JWT-encoded)
-- [Postman Collection](collections/2c2p.postman_collection.json)
-- [Open Collection](collections/2c2p.opencollection.json)
-- [Authentication](authentication/2c2p-authentication.yml)
-- [Plans](plans/2c2p-plans-pricing.yml)
-- [Rate Limits](rate-limits/2c2p-rate-limits.yml)
-- [FinOps](finops/2c2p-finops.yml)
-- [Domain Security](security/2c2p-domain-security.yml)
-- [Review](review.yml)
-
-## Real vs. Modeled
-
-- **Confirmed:** the base hosts (`pgw.2c2p.com`, `sandbox-pgw.2c2p.com`), the Payment v4.3 endpoint paths, the JWT (JWS) HMAC SHA-256 auth model, and the Merchant ID + Secret Key credential flow are all documented on developer.2c2p.com.
-- **Modeled:** the request/response field schemas in the OpenAPI and collections are a representative subset derived from the documented parameters, presented as decoded JSON for readability. Verify exact payloads against the 2C2P developer portal. Per-transaction pricing is not publicly published and is **not reconciled**.
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/2c2p)
 - [Website](https://www.2c2p.com)
 - [Documentation](https://developer.2c2p.com)
-- [Plans](plans/2c2p-plans-pricing.yml)
-- [Rate Limits](rate-limits/2c2p-rate-limits.yml)
-- [Fin Ops](finops/2c2p-finops.yml)
+- [Blog](https://2c2p.com/news/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.3** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 43.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.7** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/2c2p/](https://apis.io/providers/2c2p/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for 2C2P: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/2c2p/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
